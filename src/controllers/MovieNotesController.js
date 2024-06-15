@@ -4,7 +4,7 @@ const AppError = require("../utils/AppError");
 class MovieNotesController{
     async create(request, response) {
         const { title, description, rating, movie_tags} = request.body;
-        const { user_id } = request.params;
+        const user_id = request.user.id;
 
         if(rating > 5 || rating < 1){
             throw new AppError("Escolha uma nota entre 1 e 5")
@@ -27,7 +27,7 @@ class MovieNotesController{
 
         await knex("movie_tags").insert(tagsInsert);
 
-        response.json();
+        return response.json();
 
     }
 
@@ -52,7 +52,9 @@ class MovieNotesController{
     }
 
     async index(request, response) {
-        const { title, user_id, movie_tags } = request.query;
+        const { title, movie_tags } = request.query;
+
+        const user_id = request.user.id;
 
         let movie_notes;
 
