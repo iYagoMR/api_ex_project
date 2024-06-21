@@ -1,17 +1,17 @@
 const { Router } = require("express");
 
-const MovieNotesController = require("../controllers/MovieNotesController.js");
+const notesController = require("../controllers/NotesController.js");
 const ensureAuthenticated = require("../middlewares/ensureAutheticathed");
 
-const movieNotesRoutes = Router();
+const NotesRoutes = Router();
 
-const movieNotesController = new MovieNotesController();
+const NotesController = new notesController();
 
-movieNotesRoutes.use(ensureAuthenticated);
+NotesRoutes.use(ensureAuthenticated);
 
-movieNotesRoutes.get("/", movieNotesController.index);
-movieNotesRoutes.post("/", movieNotesController.create);
-movieNotesRoutes.get("/:id", movieNotesController.show);
-movieNotesRoutes.delete("/:id", movieNotesController.delete);
+NotesRoutes.get("/", NotesController.index);
+NotesRoutes.post("/", NotesController.create);
+NotesRoutes.get("/:id", NotesController.show);
+NotesRoutes.delete("/:id", NotesController.delete);
 
-module.exports = movieNotesRoutes;
+module.exports = NotesRoutes;
